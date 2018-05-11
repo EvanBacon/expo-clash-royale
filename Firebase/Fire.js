@@ -52,11 +52,11 @@ class Fire {
       if (this.facebookToken) {
         this._firebaseLoginWithFacebookToken(this.facebookToken);
       }
-      // try {
-      //   firebase.auth().signInAnonymously();
-      // } catch ({ message }) {
-      //   alert(message);
-      // }
+      try {
+        firebase.auth().signInAnonymously();
+      } catch ({ message }) {
+        alert(message);
+      }
     } else {
       console.log('user was logged in... setup user');
       this.authFound(user);
@@ -84,7 +84,7 @@ class Fire {
     // } else {
     //   // user = { ...user };
     // }
-    // console.log("auth'd", user);
+    console.log("auth'd", user);
     dispatch.auth.set(user);
   };
 
@@ -163,7 +163,7 @@ class Fire {
   };
 
   upgradeAccount = async () => {
-    const { token } = await this._doFacebookLoginFlow();
+    const token = await this._doFacebookLoginFlow();
 
     if (token) {
       this._upgradeAccountWithToken(token);
@@ -172,14 +172,26 @@ class Fire {
 
   // Convert anon to full user!
   _upgradeAccountWithToken = async token => {
+    console.log('upgrade Account With Token', token);
     const credential = firebase.auth.FacebookAuthProvider.credential(token);
     try {
       let user = await firebase
         .auth()
         .currentUser.linkWithCredential(credential);
+      console.log('Upgraded!', user);
       this.authFound(user);
     } catch (error) {
-      alert("Error: couldn't upgrade account", error);
+      console.log('attempt login');
+      this._firebaseLoginWithFacebookToken(token);
+      try {
+        const user = await firebase.auth().signInWithCredential(credential);
+        this.authFound(user);
+      } catch (error) {
+        console.log(error);
+
+        alert(error);
+        return;
+      }
     }
   };
 

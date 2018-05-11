@@ -24,6 +24,15 @@ class Profile extends React.Component {
         >
           <View style={styles.welcomeContainer}>
             <Text onPress={Fire.shared.logout}>Log out</Text>
+
+            {(this.props.auth || {}).isAnonymous && (
+              <Text
+                style={{ marginTop: 24 }}
+                onPress={Fire.shared.upgradeAccount}
+              >
+                Upgrade Account
+              </Text>
+            )}
           </View>
 
           <View style={styles.getStartedContainer}>
