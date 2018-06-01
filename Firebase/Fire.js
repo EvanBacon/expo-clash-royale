@@ -14,8 +14,8 @@ const FBTokenKey = '@Lizard:FBToken';
 
 class Fire {
   constructor() {
-    this.init();
-    this.observeAuth();
+    // this.init();
+    // this.observeAuth();
   }
 
   logout = async () => {

@@ -10,17 +10,55 @@ import {
 } from 'react-native';
 import { WebBrowser } from 'expo';
 
-export default class Explore extends React.Component {
+export default class ShopScreen extends React.Component {
   static navigationOptions = {
-    title: "Explore",
+    title: 'Shop',
   };
 
   render() {
     return (
       <View style={styles.container}>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-          <View style={styles.welcomeContainer}>
+        <ScrollView
+          style={styles.container}
+          contentContainerStyle={styles.contentContainer}
+        >
+          <View style={styles.welcomeContainer} />
 
+          <View style={{ borderRadius: 6, padding: 3 }}>
+            <View
+              style={{
+                borderRadius: 6,
+                borderWidth: 3,
+                borderColor: 'rgba(255,255,255,0.4)',
+                height: 128,
+                aspectRatio: 3 / 4,
+              }}
+            >
+              <Image
+                source={{
+                  uri:
+                    'https://upload.wikimedia.org/wikipedia/commons/7/75/Evan_Bacon%2C_Design_Technologist_II_at_Frog_Design.jpg',
+                }}
+                style={{
+                  flex: 1,
+                  resizeMode: 'cover',
+                }}
+              />
+              <Text
+                style={{
+                  position: 'absolute',
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  color: 'white',
+                  backgroundColor: 'rgba(0,0,0,0.3)',
+                  textAlign: 'center',
+                  fontFamily: 'expro-magic',
+                }}
+              >
+                Level 2
+              </Text>
+            </View>
           </View>
 
           <View style={styles.getStartedContainer}>
@@ -28,8 +66,9 @@ export default class Explore extends React.Component {
 
             <Text style={styles.getStartedText}>Get started by opening</Text>
 
-            <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-            </View>
+            <View
+              style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
+            />
 
             <Text style={styles.getStartedText}>
               Change this text and your app will automatically reload.
@@ -37,18 +76,16 @@ export default class Explore extends React.Component {
           </View>
 
           <View style={styles.helpContainer}>
-            <TouchableOpacity onPress={this._handleHelpPress} style={styles.helpLink}>
-              <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
+            <TouchableOpacity
+              onPress={this._handleHelpPress}
+              style={styles.helpLink}
+            >
+              <Text style={styles.helpLinkText}>
+                Help, it didn’t automatically reload!
+              </Text>
             </TouchableOpacity>
           </View>
         </ScrollView>
-
-        <View style={styles.tabBarInfoContainer}>
-          <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
-
-          <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-          </View>
-        </View>
       </View>
     );
   }
@@ -63,8 +100,8 @@ export default class Explore extends React.Component {
 
       return (
         <Text style={styles.developmentModeText}>
-          Development mode is enabled, your app will be slower but you can use useful development
-          tools. {learnMoreButton}
+          Development mode is enabled, your app will be slower but you can use
+          useful development tools. {learnMoreButton}
         </Text>
       );
     } else {
@@ -77,12 +114,14 @@ export default class Explore extends React.Component {
   }
 
   _handleLearnMorePress = () => {
-    WebBrowser.openBrowserAsync('https://docs.expo.io/versions/latest/guides/development-mode');
+    WebBrowser.openBrowserAsync(
+      'https://docs.expo.io/versions/latest/guides/development-mode',
+    );
   };
 
   _handleHelpPress = () => {
     WebBrowser.openBrowserAsync(
-      'https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes'
+      'https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes',
     );
   };
 }
@@ -90,7 +129,7 @@ export default class Explore extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#3C4A5C',
   },
   developmentModeText: {
     marginBottom: 20,

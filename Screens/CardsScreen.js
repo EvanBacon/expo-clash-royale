@@ -10,9 +10,10 @@ import {
 } from 'react-native';
 import { WebBrowser } from 'expo';
 
-class Profile extends React.Component {
+class CardsScreen extends React.Component {
   static navigationOptions = {
-    title: 'Profile',
+    title: 'Cards',
+    // tabBarIcon:
   };
 
   render() {
@@ -113,7 +114,7 @@ class Profile extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#3C4A5C',
   },
   developmentModeText: {
     marginBottom: 20,
@@ -206,4 +207,4 @@ import Fire from '../Firebase/Fire';
 
 export default connect(({ auth }) => ({
   auth,
-}))(Profile);
+}))(CardsScreen);

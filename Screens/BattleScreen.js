@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { WebBrowser } from 'expo';
 
-export default class Home extends React.Component {
+export default class BattleScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
@@ -18,18 +18,20 @@ export default class Home extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-          <View style={styles.welcomeContainer}>
-
-          </View>
+        <ScrollView
+          style={styles.container}
+          contentContainerStyle={styles.contentContainer}
+        >
+          <View style={styles.welcomeContainer} />
 
           <View style={styles.getStartedContainer}>
             {this._maybeRenderDevelopmentModeWarning()}
 
             <Text style={styles.getStartedText}>Get started by opening</Text>
 
-            <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-            </View>
+            <View
+              style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
+            />
 
             <Text style={styles.getStartedText}>
               Change this text and your app will automatically reload.
@@ -37,17 +39,25 @@ export default class Home extends React.Component {
           </View>
 
           <View style={styles.helpContainer}>
-            <TouchableOpacity onPress={this._handleHelpPress} style={styles.helpLink}>
-              <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
+            <TouchableOpacity
+              onPress={this._handleHelpPress}
+              style={styles.helpLink}
+            >
+              <Text style={styles.helpLinkText}>
+                Help, it didn’t automatically reload!
+              </Text>
             </TouchableOpacity>
           </View>
         </ScrollView>
 
         <View style={styles.tabBarInfoContainer}>
-          <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
+          <Text style={styles.tabBarInfoText}>
+            This is a tab bar. You can edit it in:
+          </Text>
 
-          <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-          </View>
+          <View
+            style={[styles.codeHighlightContainer, styles.navigationFilename]}
+          />
         </View>
       </View>
     );
@@ -63,8 +73,8 @@ export default class Home extends React.Component {
 
       return (
         <Text style={styles.developmentModeText}>
-          Development mode is enabled, your app will be slower but you can use useful development
-          tools. {learnMoreButton}
+          Development mode is enabled, your app will be slower but you can use
+          useful development tools. {learnMoreButton}
         </Text>
       );
     } else {
@@ -77,12 +87,14 @@ export default class Home extends React.Component {
   }
 
   _handleLearnMorePress = () => {
-    WebBrowser.openBrowserAsync('https://docs.expo.io/versions/latest/guides/development-mode');
+    WebBrowser.openBrowserAsync(
+      'https://docs.expo.io/versions/latest/guides/development-mode',
+    );
   };
 
   _handleHelpPress = () => {
     WebBrowser.openBrowserAsync(
-      'https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes'
+      'https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes',
     );
   };
 }
@@ -90,7 +102,7 @@ export default class Home extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#3C4A5C',
   },
   developmentModeText: {
     marginBottom: 20,
