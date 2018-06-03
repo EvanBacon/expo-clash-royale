@@ -32,7 +32,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   fill: {
-    height: 35,
     resizeMode: 'stretch',
     position: 'absolute',
     top: 0,

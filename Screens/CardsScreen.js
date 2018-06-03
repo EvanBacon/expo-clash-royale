@@ -8,6 +8,7 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  Image,
   FlatList,
 } from 'react-native';
 import { connect } from 'react-redux';
@@ -17,6 +18,8 @@ import { View } from '../differently-native';
 import Fire from '../Firebase/Fire';
 import CartoonText from '../components/CartoonText';
 import Card from '../components/Card';
+import Assets from '../Assets';
+import ValueIndicatorBar from '../components/ValueIndicatorBar';
 
 const CardListHeader = () => (
   <CartoonText
@@ -143,61 +146,35 @@ class CardsScreen extends React.Component {
       {},
       {},
     ];
+
+    const items = [
+      {
+        image: Assets.images.icons['store.png'],
+        tint: 'yellow',
+        value: 123,
+      },
+      {
+        image: Assets.images.icons['cards.png'],
+        tint: 'green',
+        value: 123,
+      },
+      {
+        image: Assets.images.icons['battle.png'],
+        tint: 'orange',
+        value: 123,
+      },
+    ];
+
     return (
       <View style={styles.container}>
         <ScrollView
           style={styles.container}
           contentContainerStyle={styles.contentContainer}
         >
+          <ValueIndicatorBar items={items} />
+
           <CardList data={cards} />
-          <View style={styles.welcomeContainer}>
-            <Text onPress={Fire.shared.logout}>Log out</Text>
-
-            {(this.props.auth || {}).isAnonymous && (
-              <Text
-                style={{ marginTop: 24 }}
-                onPress={Fire.shared.upgradeAccount}
-              >
-                Upgrade Account
-              </Text>
-            )}
-          </View>
-
-          <View style={styles.getStartedContainer}>
-            {this._maybeRenderDevelopmentModeWarning()}
-
-            <Text style={styles.getStartedText}>Get started by opening</Text>
-
-            <View
-              style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
-            />
-
-            <Text style={styles.getStartedText}>
-              {JSON.stringify(this.props.auth || {})}
-            </Text>
-          </View>
-
-          <View style={styles.helpContainer}>
-            <TouchableOpacity
-              onPress={this._handleHelpPress}
-              style={styles.helpLink}
-            >
-              <Text style={styles.helpLinkText}>
-                Help, it didn’t automatically reload!
-              </Text>
-            </TouchableOpacity>
-          </View>
         </ScrollView>
-
-        <View style={styles.tabBarInfoContainer}>
-          <Text style={styles.tabBarInfoText}>
-            This is a tab bar. You can edit it in:
-          </Text>
-
-          <View
-            style={[styles.codeHighlightContainer, styles.navigationFilename]}
-          />
-        </View>
       </View>
     );
   }
