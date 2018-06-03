@@ -1,14 +1,89 @@
+import 'redux';
+
+import { WebBrowser } from 'expo';
 import React from 'react';
 import {
-  Image,
   Platform,
   ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
+  FlatList,
 } from 'react-native';
-import { WebBrowser } from 'expo';
+import { connect } from 'react-redux';
+
+import WoodTexture from '../components/WoodTexture';
+import { View } from '../differently-native';
+import Fire from '../Firebase/Fire';
+import CartoonText from '../components/CartoonText';
+import Card from '../components/Card';
+
+const CardListHeader = () => (
+  <CartoonText
+    style={{
+      fontSize: 16,
+      textAlign: 'center',
+      paddingBottom: 16,
+    }}
+  >
+    Battle Deck
+  </CartoonText>
+);
+
+const CardListFooterComponent = () => (
+  <View
+    style={{
+      backgroundColor: '#583722',
+      marginTop: 16,
+      borderRadius: 4,
+      paddingVertical: 8,
+      justifyContent: 'center',
+      alignItems: 'center',
+    }}
+  >
+    <CartoonText
+      style={{
+        fontSize: 12,
+        color: '#FF66FF',
+        textAlign: 'center',
+      }}
+    >
+      Average Elixer cost: 3.5
+    </CartoonText>
+  </View>
+);
+
+class CardList extends React.Component {
+  renderItem = ({ item }) => {
+    return <Card {...item} />;
+  };
+  render() {
+    const { props } = this;
+
+    return (
+      <WoodTexture
+        style={{
+          padding: 16,
+          justifyContent: 'center',
+          alignItems: 'stretch',
+        }}
+      >
+        <FlatList
+          columnWrapperStyle={{
+            padding: 4,
+            flex: 1,
+            justifyContent: 'space-between',
+          }}
+          numColumns={3}
+          renderItem={this.renderItem}
+          ListHeaderComponent={CardListHeader}
+          ListFooterComponent={CardListFooterComponent}
+          {...props}
+        />
+      </WoodTexture>
+    );
+  }
+}
 
 class CardsScreen extends React.Component {
   static navigationOptions = {
@@ -17,12 +92,64 @@ class CardsScreen extends React.Component {
   };
 
   render() {
+    const evanImage = {
+      uri:
+        'https://upload.wikimedia.org/wikipedia/commons/7/75/Evan_Bacon%2C_Design_Technologist_II_at_Frog_Design.jpg',
+    };
+
+    const cards = [
+      {
+        image: evanImage,
+        nextLevel: { max: 5, value: 3 },
+        tint: '#70C65F',
+        level: 3,
+      },
+      {
+        image: evanImage,
+        nextLevel: { max: 5, value: 3 },
+        tint: '#70C65F',
+        level: 3,
+      },
+      {
+        image: evanImage,
+        nextLevel: { max: 5, value: 3 },
+        tint: '#70C65F',
+        level: 3,
+      },
+      {
+        image: evanImage,
+        nextLevel: { max: 5, value: 3 },
+        tint: '#70C65F',
+        level: 3,
+      },
+      {
+        image: evanImage,
+        nextLevel: { max: 5, value: 3 },
+        tint: '#70C65F',
+        level: 3,
+      },
+      {
+        image: evanImage,
+        nextLevel: { max: 5, value: 3 },
+        tint: '#70C65F',
+        level: 3,
+      },
+      {
+        image: evanImage,
+        nextLevel: { max: 5, value: 3 },
+        tint: '#70C65F',
+        level: 3,
+      },
+      {},
+      {},
+    ];
     return (
       <View style={styles.container}>
         <ScrollView
           style={styles.container}
           contentContainerStyle={styles.contentContainer}
         >
+          <CardList data={cards} />
           <View style={styles.welcomeContainer}>
             <Text onPress={Fire.shared.logout}>Log out</Text>
 
@@ -199,11 +326,6 @@ const styles = StyleSheet.create({
     color: '#2e78b7',
   },
 });
-
-import { dispatch } from '@rematch/core'; // Version can be specified in package.json
-import { connect } from 'react-redux'; // Version can be specified in package.json
-import 'redux'; // Version can be specified in package.json
-import Fire from '../Firebase/Fire';
 
 export default connect(({ auth }) => ({
   auth,

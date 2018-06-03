@@ -6,10 +6,9 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
 } from 'react-native';
 import { WebBrowser } from 'expo';
-
+import { View } from '../differently-native';
 export default class BattleScreen extends React.Component {
   static navigationOptions = {
     header: null,

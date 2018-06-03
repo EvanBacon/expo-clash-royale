@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import Fire from '../Firebase/Fire';
+import { View } from '../differently-native';
 export default class Login extends React.Component {
   static navigationOptions = {
     header: null,
@@ -15,7 +16,8 @@ export default class Login extends React.Component {
           borderRadius: 4,
           padding: 24,
           backgroundColor: '#3B5998',
-        }}>
+        }}
+      >
         <Text style={{ color: 'white', fontWeight: 'bold' }}>
           Login to Facebook
         </Text>
@@ -26,9 +28,7 @@ export default class Login extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.getStartedText}>
-          Welcome LizardBook
-        </Text>
+        <Text style={styles.getStartedText}>Welcome LizardBook</Text>
 
         {this.renderButton()}
       </View>

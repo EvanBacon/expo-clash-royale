@@ -5,17 +5,24 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  ImageBackground,
   TouchableOpacity,
-  View,
 } from 'react-native';
+import { View } from '../differently-native';
 import { WebBrowser } from 'expo';
-
+import Assets from '../Assets';
+import { Ionicons } from '@expo/vector-icons';
+import Card from '../components/Card';
 export default class ShopScreen extends React.Component {
   static navigationOptions = {
     title: 'Shop',
   };
 
   render() {
+    const evanImage = {
+      uri:
+        'https://upload.wikimedia.org/wikipedia/commons/7/75/Evan_Bacon%2C_Design_Technologist_II_at_Frog_Design.jpg',
+    };
     return (
       <View style={styles.container}>
         <ScrollView
@@ -24,40 +31,18 @@ export default class ShopScreen extends React.Component {
         >
           <View style={styles.welcomeContainer} />
 
-          <View style={{ borderRadius: 6, padding: 3 }}>
+          <View style={{ justifyContent: 'center', alignItems: 'center' }}>
             <View
               style={{
-                borderRadius: 6,
-                borderWidth: 3,
-                borderColor: 'rgba(255,255,255,0.4)',
-                height: 128,
-                aspectRatio: 3 / 4,
+                flex: undefined,
               }}
             >
-              <Image
-                source={{
-                  uri:
-                    'https://upload.wikimedia.org/wikipedia/commons/7/75/Evan_Bacon%2C_Design_Technologist_II_at_Frog_Design.jpg',
-                }}
-                style={{
-                  flex: 1,
-                  resizeMode: 'cover',
-                }}
+              <Card
+                nextLevel={{ max: 5, value: 3 }}
+                level={3}
+                image={evanImage}
+                tint={'#70C65F'}
               />
-              <Text
-                style={{
-                  position: 'absolute',
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  color: 'white',
-                  backgroundColor: 'rgba(0,0,0,0.3)',
-                  textAlign: 'center',
-                  fontFamily: 'expro-magic',
-                }}
-              >
-                Level 2
-              </Text>
             </View>
           </View>
 
@@ -125,6 +110,91 @@ export default class ShopScreen extends React.Component {
     );
   };
 }
+
+const UpdateLoader = ({
+  style,
+  tint,
+  loader: { style: loaderStyle, ...loader },
+  icon,
+}) => (
+  <View style={[{ flexDirection: 'row', alignItems: 'flex-end' }, style]}>
+    <UpgradeIcon
+      style={{
+        zIndex: 1,
+        shadowOpacity: 1,
+        shadowColor: 'black',
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 0,
+        position: 'absolute',
+        left: 0,
+        bottom: 0,
+        right: 0,
+      }}
+      color={tint}
+      {...icon}
+    />
+    <ValueLoader offset={3} style={[loaderStyle]} tint={tint} {...loader} />
+  </View>
+);
+
+const UpgradeIcon = props => (
+  <Ionicons size={32} color="#ACFA76" {...props} name="md-star" />
+);
+
+const ValueLoader = ({ value, max, ...loader }) => {
+  const thign = `${value}/${max}`;
+  const percentage = value / max * 100;
+  return (
+    <Loader value={percentage} {...loader}>
+      <Text
+        style={{
+          fontFamily: 'expro-magic',
+          color: 'white',
+          fontSize: 10,
+          shadowOpacity: 1,
+          shadowColor: 'black',
+          shadowOffset: { width: 0, height: 2 },
+          shadowRadius: 0,
+        }}
+      >
+        {thign}
+      </Text>
+    </Loader>
+  );
+};
+
+const Loader = ({ tint, value, style, offset, children }) => (
+  <View
+    style={[
+      {
+        borderWidth: 1,
+        borderColor: 'rgba(255,255,255,0.3)',
+        backgroundColor: 'transparent',
+        borderRadius: 4,
+        justifyContent: 'center',
+        alignItems: 'center',
+        overflow: 'hidden',
+        flex: 1,
+      },
+      style,
+    ]}
+  >
+    <Image
+      style={{
+        height: 35,
+        width: offset + (value - offset),
+        backgroundColor: tint,
+        resizeMode: 'stretch',
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        left: 0,
+      }}
+      source={Assets.images['bar_fill.png']}
+    />
+    {children}
+  </View>
+);
 
 const styles = StyleSheet.create({
   container: {

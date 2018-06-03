@@ -3,23 +3,23 @@ import BattleScreen from './Screens/BattleScreen';
 import ShopScreen from './Screens/ShopScreen';
 import CardsScreen from './Screens/CardsScreen';
 import { StyleSheet } from 'react-native';
+
 const Navigation = TabNavigator(
   {
+    Cards: {
+      screen: CardsScreen,
+    },
     Shop: {
       screen: ShopScreen,
     },
     Battle: {
       screen: BattleScreen,
     },
-    Cards: {
-      screen: CardsScreen,
-    },
   },
   {
     swipeEnabled: true,
     tabBarPosition: 'bottom',
     animationEnabled: true,
-
     cardStyle: {
       backgroundColor: '#3C4A5C',
     },
@@ -32,6 +32,9 @@ const Navigation = TabNavigator(
       showIcon: true,
       style: {
         height: 64,
+        backgroundColor: '#344252',
+        borderBottomWidth: 0,
+        padding: 0,
         // borderTopWidth: 3 + StyleSheet.hairlineWidth,
         // borderTopColor: 'rgba(255,255,255,0.3)',
         borderColor: '#737D89',
@@ -41,7 +44,7 @@ const Navigation = TabNavigator(
       tabStyle: {
         borderTopWidth: 3 + StyleSheet.hairlineWidth,
         borderTopColor: 'rgba(255,255,255,0.3)',
-
+        borderBottomWidth: 0,
         borderLeftWidth: 1 + StyleSheet.hairlineWidth,
         borderRightWidth: 1 + StyleSheet.hairlineWidth,
         borderColor: '#737D89',

@@ -3,13 +3,12 @@ import { Provider } from 'react-redux'; // Version can be specified in package.j
 import { init } from '@rematch/core'; // Version can be specified in package.json
 import AuthStateLayer from './AuthStateLayer';
 import * as models from './models';
-import { View } from 'react-native';
 import '@expo/vector-icons'; // Version can be specified in package.json
 import 'redux'; // Version can be specified in package.json
 import Navigation from './Navigation';
 import AssetUtils from 'expo-asset-utils';
 import Assets from './Assets';
-
+import { View } from './differently-native';
 const store = init({
   models,
 });
