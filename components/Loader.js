@@ -23,7 +23,7 @@ export default (Loader = ({ tint, value, style, offset, children }) => (
 const styles = StyleSheet.create({
   container: {
     borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.3)',
+    borderColor: 'black',
     backgroundColor: 'transparent',
     borderRadius: 4,
     justifyContent: 'center',

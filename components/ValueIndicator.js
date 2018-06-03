@@ -3,18 +3,23 @@ import { Image, StyleSheet } from 'react-native';
 
 import CartoonText from '../components/CartoonText';
 import { View } from '../differently-native';
+import TouchableBounce from './TouchableBounce';
 
 class ValueIndicator extends React.PureComponent {
+  onPress = () => {
+    const { onPress } = this.props;
+    onPress && onPress();
+  };
   render() {
     const { value, tint, image } = this.props;
     return (
-      <View style={styles.container}>
+      <TouchableBounce onPress={this.onPress} style={styles.container}>
         <View style={styles.bar} />
         <CartoonText style={{ color: tint }}>{value}</CartoonText>
         <View style={[styles.imageContainer, { backgroundColor: tint }]}>
           <Image source={image} style={styles.image} />
         </View>
-      </View>
+      </TouchableBounce>
     );
   }
 }

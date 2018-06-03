@@ -8,13 +8,17 @@ export default {
 	},
 	"images": {
 		"bar_fill.png": require(`./assets/images/bar_fill.png`),
-		"textures": {
-			"wood.jpg": require(`./assets/images/textures/wood.jpg`)
+		"arrow": {
+			"green.png": require(`./assets/images/arrow/green.png`)
 		},
 		"icons": {
 			"battle.png": require(`./assets/images/icons/battle.png`),
 			"cards.png": require(`./assets/images/icons/cards.png`),
+			"coin.png": require(`./assets/images/icons/coin.png`),
 			"store.png": require(`./assets/images/icons/store.png`)
+		},
+		"textures": {
+			"wood.jpg": require(`./assets/images/textures/wood.jpg`)
 		}
 	}
 };

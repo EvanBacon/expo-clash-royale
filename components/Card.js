@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 12,
     borderTopRightRadius: 12,
     padding: 5,
-    backgroundColor: 'black',
+    backgroundColor: 'rgba(0,0,0,0.7)',
   },
   imageContainer: {
     borderRadius: 8,
