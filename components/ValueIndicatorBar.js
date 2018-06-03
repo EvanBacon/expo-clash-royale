@@ -4,21 +4,31 @@ import { StyleSheet } from 'react-native';
 import Assets from '../Assets';
 import ValueIndicator from '../components/ValueIndicator';
 import { View } from '../differently-native';
+import { LinearGradient } from 'expo';
 
 class ValueIndicatorBar extends React.Component {
   render() {
     const { items } = this.props;
     return (
-      <View style={styles.container}>
+      <LinearGradient
+        colors={['black', 'transparent']}
+        style={styles.container}
+      >
         {items.map((item, index) => <ValueIndicator {...item} key={index} />)}
-      </View>
+      </LinearGradient>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 8,
+    zIndex: 1,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    paddingBottom: 8,
+    paddingTop: 38,
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',

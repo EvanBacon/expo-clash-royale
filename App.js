@@ -1,14 +1,15 @@
 import React from 'react';
-import { Provider } from 'react-redux'; // Version can be specified in package.json
-import { init } from '@rematch/core'; // Version can be specified in package.json
+import { Provider } from 'react-redux';
+import { init } from '@rematch/core';
 import AuthStateLayer from './AuthStateLayer';
 import * as models from './models';
-import '@expo/vector-icons'; // Version can be specified in package.json
-import 'redux'; // Version can be specified in package.json
+import '@expo/vector-icons';
+import 'redux';
 import Navigation from './Navigation';
 import AssetUtils from 'expo-asset-utils';
 import Assets from './Assets';
 import { View } from './differently-native';
+import { StatusBar } from 'react-native';
 const store = init({
   models,
 });
@@ -29,7 +30,8 @@ export default class App extends React.Component {
 
   get files() {
     return [
-      // ...AssetUtils.arrayFromObject(Assets.images || {}),
+      ...AssetUtils.arrayFromObject(Assets.images || {}),
+      // ...AssetUtils.arrayFromObject(Assets.icons || {}),
       // ...AssetUtils.arrayFromObject(Assets.models || {}),
     ];
   }
@@ -41,7 +43,7 @@ export default class App extends React.Component {
   async preloadAssets() {
     await AssetUtils.cacheAssetsAsync({
       fonts: this.fonts,
-      // files: this.files,
+      files: this.files,
       // audio: this.audio,
     });
     this.setState({ loading: false });
@@ -49,6 +51,7 @@ export default class App extends React.Component {
 
   componentWillMount() {
     this.preloadAssets();
+    StatusBar.setBarStyle('light-content', false);
   }
 
   render() {

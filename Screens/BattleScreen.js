@@ -9,11 +9,9 @@ import {
 } from 'react-native';
 import { WebBrowser } from 'expo';
 import { View } from '../differently-native';
-export default class BattleScreen extends React.Component {
-  static navigationOptions = {
-    header: null,
-  };
+import Assets from '../Assets';
 
+export default class BattleScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>

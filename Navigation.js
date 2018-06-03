@@ -1,19 +1,84 @@
+import React from 'react';
 import { TabNavigator } from 'react-navigation'; // Version can be specified in package.json
 import BattleScreen from './Screens/BattleScreen';
 import ShopScreen from './Screens/ShopScreen';
 import CardsScreen from './Screens/CardsScreen';
-import { StyleSheet } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
+import Assets from './Assets';
+
+const getTransform = focused => {
+  return focused
+    ? {
+        transform: [{ scale: 1.4 }, { translateY: -12 }],
+      }
+    : {
+        transform: [{ scale: 1 }, { translateY: -4 }],
+      };
+};
+
+const TabIcon = ({ icon, tintColor, focused }) => (
+  <View
+    style={[
+      {
+        justifyContent: 'center',
+        alignItems: 'center',
+        aspectRatio: 1,
+        width: 36,
+        height: 36,
+        borderRadius: 36 / 2,
+        padding: 4,
+        shadowOffset: { width: 0, height: 0 },
+        shadowRadius: 2,
+        shadowOpacity: 0.6,
+        backgroundColor: focused ? 'white' : 'transparent',
+      },
+      getTransform(focused),
+    ]}
+  >
+    <Image
+      style={{
+        tintColor,
+        flex: 1,
+        resizeMode: 'contain',
+      }}
+      source={icon}
+    />
+  </View>
+);
+
+const CardsIcon = props => (
+  <TabIcon {...props} icon={Assets.images.icons['cards.png']} />
+);
+const ShopIcon = props => (
+  <TabIcon {...props} icon={Assets.images.icons['store.png']} />
+);
+const BattleIcon = props => (
+  <TabIcon {...props} icon={Assets.images.icons['battle.png']} />
+);
 
 const Navigation = TabNavigator(
   {
-    Cards: {
-      screen: CardsScreen,
-    },
     Shop: {
       screen: ShopScreen,
+      navigationOptions: {
+        title: 'Shop',
+        tabBarIcon: ShopIcon,
+      },
     },
+    Cards: {
+      screen: CardsScreen,
+      navigationOptions: {
+        title: 'Cards',
+        tabBarIcon: CardsIcon,
+      },
+    },
+
     Battle: {
       screen: BattleScreen,
+      navigationOptions: {
+        title: 'Battle',
+        tabBarIcon: BattleIcon,
+      },
     },
   },
   {
@@ -24,7 +89,7 @@ const Navigation = TabNavigator(
       backgroundColor: '#3C4A5C',
     },
     tabBarOptions: {
-      activeTintColor: '#ffffff',
+      activeTintColor: '#000000',
       activeBackgroundColor: '#5682A5',
       inactiveTintColor: '#B9B9B9',
       inactiveBackgroundColor: '#344252',

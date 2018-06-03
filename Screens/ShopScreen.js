@@ -5,14 +5,54 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  FlatList,
   ImageBackground,
   TouchableOpacity,
+  Dimensions,
 } from 'react-native';
 import { View } from '../differently-native';
 import { WebBrowser } from 'expo';
 import Assets from '../Assets';
 import { Ionicons } from '@expo/vector-icons';
 import Card from '../components/Card';
+import CartoonText from '../components/CartoonText';
+
+const { height } = Dimensions.get('window');
+
+const EmptyShopList = () => (
+  <View
+    style={{
+      alignItems: 'center',
+      flex: 1,
+      justifyContent: 'center',
+      backgroundColor: 'red',
+      paddingTop: 30,
+      height: height * 0.75,
+    }}
+  >
+    <View
+      style={{
+        width: 64,
+        aspectRatio: 1,
+        padding: 6,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'white',
+        borderRadius: 100,
+      }}
+    >
+      <Image
+        source={Assets.images.icons['store.png']}
+        style={{ resizeMode: 'contain', flex: 1 }}
+      />
+    </View>
+    <CartoonText style={{ fontSize: 20 }}>Shop Unlocks</CartoonText>
+    <CartoonText style={{ fontSize: 16, color: '#5ECCFE' }}>
+      At Arena 1
+    </CartoonText>
+  </View>
+);
+
 export default class ShopScreen extends React.Component {
   static navigationOptions = {
     title: 'Shop',
@@ -25,176 +65,15 @@ export default class ShopScreen extends React.Component {
     };
     return (
       <View style={styles.container}>
-        <ScrollView
+        <FlatList
           style={styles.container}
           contentContainerStyle={styles.contentContainer}
-        >
-          <View style={styles.welcomeContainer} />
-
-          <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-            <View
-              style={{
-                flex: undefined,
-              }}
-            >
-              <Card
-                nextLevel={{ max: 5, value: 3 }}
-                level={3}
-                image={evanImage}
-                tint={'#70C65F'}
-              />
-            </View>
-          </View>
-
-          <View style={styles.getStartedContainer}>
-            {this._maybeRenderDevelopmentModeWarning()}
-
-            <Text style={styles.getStartedText}>Get started by opening</Text>
-
-            <View
-              style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
-            />
-
-            <Text style={styles.getStartedText}>
-              Change this text and your app will automatically reload.
-            </Text>
-          </View>
-
-          <View style={styles.helpContainer}>
-            <TouchableOpacity
-              onPress={this._handleHelpPress}
-              style={styles.helpLink}
-            >
-              <Text style={styles.helpLinkText}>
-                Help, it didn’t automatically reload!
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </ScrollView>
+          ListEmptyComponent={EmptyShopList}
+        />
       </View>
     );
   }
-
-  _maybeRenderDevelopmentModeWarning() {
-    if (__DEV__) {
-      const learnMoreButton = (
-        <Text onPress={this._handleLearnMorePress} style={styles.helpLinkText}>
-          Learn more
-        </Text>
-      );
-
-      return (
-        <Text style={styles.developmentModeText}>
-          Development mode is enabled, your app will be slower but you can use
-          useful development tools. {learnMoreButton}
-        </Text>
-      );
-    } else {
-      return (
-        <Text style={styles.developmentModeText}>
-          You are not in development mode, your app will run at full speed.
-        </Text>
-      );
-    }
-  }
-
-  _handleLearnMorePress = () => {
-    WebBrowser.openBrowserAsync(
-      'https://docs.expo.io/versions/latest/guides/development-mode',
-    );
-  };
-
-  _handleHelpPress = () => {
-    WebBrowser.openBrowserAsync(
-      'https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes',
-    );
-  };
 }
-
-const UpdateLoader = ({
-  style,
-  tint,
-  loader: { style: loaderStyle, ...loader },
-  icon,
-}) => (
-  <View style={[{ flexDirection: 'row', alignItems: 'flex-end' }, style]}>
-    <UpgradeIcon
-      style={{
-        zIndex: 1,
-        shadowOpacity: 1,
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: 2 },
-        shadowRadius: 0,
-        position: 'absolute',
-        left: 0,
-        bottom: 0,
-        right: 0,
-      }}
-      color={tint}
-      {...icon}
-    />
-    <ValueLoader offset={3} style={[loaderStyle]} tint={tint} {...loader} />
-  </View>
-);
-
-const UpgradeIcon = props => (
-  <Ionicons size={32} color="#ACFA76" {...props} name="md-star" />
-);
-
-const ValueLoader = ({ value, max, ...loader }) => {
-  const thign = `${value}/${max}`;
-  const percentage = value / max * 100;
-  return (
-    <Loader value={percentage} {...loader}>
-      <Text
-        style={{
-          fontFamily: 'expro-magic',
-          color: 'white',
-          fontSize: 10,
-          shadowOpacity: 1,
-          shadowColor: 'black',
-          shadowOffset: { width: 0, height: 2 },
-          shadowRadius: 0,
-        }}
-      >
-        {thign}
-      </Text>
-    </Loader>
-  );
-};
-
-const Loader = ({ tint, value, style, offset, children }) => (
-  <View
-    style={[
-      {
-        borderWidth: 1,
-        borderColor: 'rgba(255,255,255,0.3)',
-        backgroundColor: 'transparent',
-        borderRadius: 4,
-        justifyContent: 'center',
-        alignItems: 'center',
-        overflow: 'hidden',
-        flex: 1,
-      },
-      style,
-    ]}
-  >
-    <Image
-      style={{
-        height: 35,
-        width: offset + (value - offset),
-        backgroundColor: tint,
-        resizeMode: 'stretch',
-        position: 'absolute',
-        top: 0,
-        bottom: 0,
-        left: 0,
-      }}
-      source={Assets.images['bar_fill.png']}
-    />
-    {children}
-  </View>
-);
 
 const styles = StyleSheet.create({
   container: {
@@ -208,9 +87,7 @@ const styles = StyleSheet.create({
     lineHeight: 19,
     textAlign: 'center',
   },
-  contentContainer: {
-    paddingTop: 30,
-  },
+  contentContainer: {},
   welcomeContainer: {
     alignItems: 'center',
     marginTop: 10,

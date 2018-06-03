@@ -20,6 +20,7 @@ import CartoonText from '../components/CartoonText';
 import Card from '../components/Card';
 import Assets from '../Assets';
 import ValueIndicatorBar from '../components/ValueIndicatorBar';
+import SillyButton from '../components/SillyButton';
 
 const CardListHeader = () => (
   <CartoonText
@@ -66,18 +67,19 @@ class CardList extends React.Component {
     return (
       <WoodTexture
         style={{
-          padding: 16,
           justifyContent: 'center',
           alignItems: 'stretch',
         }}
       >
         <FlatList
+          keyExtractor={(item, index) => index}
           columnWrapperStyle={{
-            padding: 4,
             flex: 1,
+            padding: 4,
             justifyContent: 'space-between',
           }}
           numColumns={3}
+          contentContainerStyle={styles.contentContainer}
           renderItem={this.renderItem}
           ListHeaderComponent={CardListHeader}
           ListFooterComponent={CardListFooterComponent}
@@ -87,6 +89,30 @@ class CardList extends React.Component {
     );
   }
 }
+
+const TipThing = () => (
+  <View
+    style={{
+      backgroundColor: 'rgba(0,0,0,0.5)',
+      paddingHorizontal: 10,
+      paddingVertical: 6,
+      borderRadius: 8,
+      marginHorizontal: 12,
+      marginVertical: 24,
+
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    }}
+  >
+    <View style={{ justifyContent: 'space-between' }}>
+      <CartoonText style={{ fontSize: 14 }}>Card Collection</CartoonText>
+      <CartoonText style={{ color: '#FF9BFF', fontSize: 10 }}>
+        Found: 6/84
+      </CartoonText>
+    </View>
+    <SillyButton tintColor={'#5A60A4'}>By Arena</SillyButton>
+  </View>
+);
 
 class CardsScreen extends React.Component {
   static navigationOptions = {
@@ -167,13 +193,13 @@ class CardsScreen extends React.Component {
 
     return (
       <View style={styles.container}>
+        <ValueIndicatorBar items={items} />
         <ScrollView
-          style={styles.container}
-          contentContainerStyle={styles.contentContainer}
+          style={{ flex: 1 }}
+          contentContainerStyle={{ paddingTop: 84 }}
         >
-          <ValueIndicatorBar items={items} />
-
           <CardList data={cards} />
+          <TipThing />
         </ScrollView>
       </View>
     );
@@ -218,6 +244,7 @@ class CardsScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    // paddingTop: 30,
     backgroundColor: '#3C4A5C',
   },
   developmentModeText: {
@@ -228,7 +255,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   contentContainer: {
-    paddingTop: 30,
+    padding: 16,
   },
   welcomeContainer: {
     alignItems: 'center',

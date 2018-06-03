@@ -3,6 +3,7 @@ import { Image, StyleSheet, Text } from 'react-native';
 import { View } from '../differently-native';
 import UpgradeLoader from './UpgradeLoader';
 import CartoonText from './CartoonText';
+import TouchableBounce from './TouchableBounce';
 
 export default class Card extends React.Component {
   renderEmpty = () => (
@@ -17,25 +18,28 @@ export default class Card extends React.Component {
     const {
       level,
       image,
+      onPress,
       tint,
       nextLevel: { max, value },
     } = this.props;
     return (
-      <View style={styles.container}>
-        <View style={styles.imageContainer}>
-          <Image source={image} style={styles.image} />
-          <Text style={styles.level}>Level {level}</Text>
-        </View>
+      <TouchableBounce onPress={onPress}>
+        <View style={styles.container}>
+          <View style={styles.imageContainer}>
+            <Image source={image} style={styles.image} />
+            <Text style={styles.level}>Level {level}</Text>
+          </View>
 
-        <UpgradeLoader
-          tint={tint}
-          loader={{
-            style: { marginTop: 4 },
-            value,
-            max,
-          }}
-        />
-      </View>
+          <UpgradeLoader
+            tint={tint}
+            loader={{
+              style: { marginTop: 4 },
+              value,
+              max,
+            }}
+          />
+        </View>
+      </TouchableBounce>
     );
   };
   render() {
