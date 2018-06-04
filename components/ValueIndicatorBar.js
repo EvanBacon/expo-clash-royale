@@ -7,16 +7,31 @@ import { View } from '../differently-native';
 import { LinearGradient } from 'expo';
 
 class ValueIndicatorBar extends React.Component {
+  get items() {
+    return this.props.items.map((item, index) => (
+      <ValueIndicator {...item} key={index} />
+    ));
+  }
   render() {
-    const { items } = this.props;
     return (
-      <LinearGradient
-        colors={['black', 'transparent']}
-        style={styles.container}
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-around',
+          alignItems: 'center',
+        }}
       >
-        {items.map((item, index) => <ValueIndicator {...item} key={index} />)}
-      </LinearGradient>
+        {this.items}
+      </View>
     );
+    // return (
+    //   <LinearGradient
+    //     colors={['black', 'transparent']}
+    //     style={styles.container}
+    //   >
+    //     {}
+    //   </LinearGradient>
+    // );
   }
 }
 

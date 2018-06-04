@@ -14,6 +14,10 @@ const store = init({
   models,
 });
 
+if (__DEV__) {
+  require('react-devtools');
+}
+
 export default class App extends React.Component {
   state = { loading: true };
 

@@ -5,6 +5,9 @@
   "author": null,
   "private": true,
   "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "react-devtool": "react-devtools"
+  },
   "dependencies": {
     "@expo/vector-icons": "6.3.1",
     "@rematch/core": "0.6.0",
@@ -19,5 +22,8 @@
     "react-redux": "5.0.6",
     "redux": "3.7.2",
     "uuid": "3.2.1"
+  },
+  "devDependencies": {
+    "react-devtools": "^3.2.3"
   }
 }

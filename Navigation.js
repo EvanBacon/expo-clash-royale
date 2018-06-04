@@ -1,10 +1,18 @@
 import React from 'react';
-import { TabNavigator } from 'react-navigation'; // Version can be specified in package.json
+import { TabNavigator, StackNavigator } from 'react-navigation'; // Version can be specified in package.json
 import BattleScreen from './Screens/BattleScreen';
 import ShopScreen from './Screens/ShopScreen';
 import CardsScreen from './Screens/CardsScreen';
-import { Image, StyleSheet, View } from 'react-native';
+import { Image, Text, StyleSheet, View } from 'react-native';
 import Assets from './Assets';
+import ValueIndicatorBar from './components/ValueIndicatorBar';
+
+const CustomHeader = ({ title, subtitle }) => (
+  <View style={{}}>
+    <Text style={{}}>{title}</Text>
+    <Text style={{}}>{subtitle}</Text>
+  </View>
+);
 
 const getTransform = focused => {
   return focused
@@ -56,7 +64,7 @@ const BattleIcon = props => (
   <TabIcon {...props} icon={Assets.images.icons['battle.png']} />
 );
 
-const Navigation = TabNavigator(
+const TabNavigation = TabNavigator(
   {
     Shop: {
       screen: ShopScreen,
@@ -119,5 +127,49 @@ const Navigation = TabNavigator(
     },
   },
 );
+
+TabNavigation.navigationOptions = ({ title, subtitle }) => {
+  const items = [
+    {
+      image: Assets.images.icons['store.png'],
+      tint: 'yellow',
+      value: 123,
+    },
+    {
+      image: Assets.images.icons['cards.png'],
+      tint: 'green',
+      value: 123,
+    },
+    {
+      image: Assets.images.icons['battle.png'],
+      tint: 'orange',
+      value: 123,
+    },
+  ];
+
+  return {
+    headerTitle: <ValueIndicatorBar items={items} />,
+    headerStyle: {
+      backgroundColor: 'transparent',
+      borderBottomWidth: 0,
+      shadowOpacity: 0,
+      zIndex: 100,
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+    },
+  };
+};
+
+const Navigation = StackNavigator(
+  {
+    Main: { screen: TabNavigation },
+  },
+  {},
+);
+// navigationOptions: {
+//   header: <ValueIndicatorBar items={items} />,
+// },
 
 export default Navigation;

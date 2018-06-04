@@ -10,53 +10,59 @@ import {
 import { WebBrowser } from 'expo';
 import { View } from '../differently-native';
 import Assets from '../Assets';
+import Screen from '../components/Screen';
 
 export default class BattleScreen extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <ScrollView
-          style={styles.container}
-          contentContainerStyle={styles.contentContainer}
-        >
-          <View style={styles.welcomeContainer} />
+      <Screen>
+        <View style={styles.container}>
+          <ScrollView
+            style={styles.container}
+            contentContainerStyle={styles.contentContainer}
+          >
+            <View style={styles.welcomeContainer} />
 
-          <View style={styles.getStartedContainer}>
-            {this._maybeRenderDevelopmentModeWarning()}
+            <View style={styles.getStartedContainer}>
+              {this._maybeRenderDevelopmentModeWarning()}
 
-            <Text style={styles.getStartedText}>Get started by opening</Text>
+              <Text style={styles.getStartedText}>Get started by opening</Text>
+
+              <View
+                style={[
+                  styles.codeHighlightContainer,
+                  styles.homeScreenFilename,
+                ]}
+              />
+
+              <Text style={styles.getStartedText}>
+                Change this text and your app will automatically reload.
+              </Text>
+            </View>
+
+            <View style={styles.helpContainer}>
+              <TouchableOpacity
+                onPress={this._handleHelpPress}
+                style={styles.helpLink}
+              >
+                <Text style={styles.helpLinkText}>
+                  Help, it didn’t automatically reload!
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </ScrollView>
+
+          <View style={styles.tabBarInfoContainer}>
+            <Text style={styles.tabBarInfoText}>
+              This is a tab bar. You can edit it in:
+            </Text>
 
             <View
-              style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
+              style={[styles.codeHighlightContainer, styles.navigationFilename]}
             />
-
-            <Text style={styles.getStartedText}>
-              Change this text and your app will automatically reload.
-            </Text>
           </View>
-
-          <View style={styles.helpContainer}>
-            <TouchableOpacity
-              onPress={this._handleHelpPress}
-              style={styles.helpLink}
-            >
-              <Text style={styles.helpLinkText}>
-                Help, it didn’t automatically reload!
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </ScrollView>
-
-        <View style={styles.tabBarInfoContainer}>
-          <Text style={styles.tabBarInfoText}>
-            This is a tab bar. You can edit it in:
-          </Text>
-
-          <View
-            style={[styles.codeHighlightContainer, styles.navigationFilename]}
-          />
         </View>
-      </View>
+      </Screen>
     );
   }
 

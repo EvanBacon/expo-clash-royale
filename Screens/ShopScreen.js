@@ -16,6 +16,8 @@ import Assets from '../Assets';
 import { Ionicons } from '@expo/vector-icons';
 import Card from '../components/Card';
 import CartoonText from '../components/CartoonText';
+import Screen from '../components/Screen';
+import isIphoneX, { paddingTop } from '../utils/isIphoneX';
 
 const { height } = Dimensions.get('window');
 
@@ -64,13 +66,18 @@ export default class ShopScreen extends React.Component {
         'https://upload.wikimedia.org/wikipedia/commons/7/75/Evan_Bacon%2C_Design_Technologist_II_at_Frog_Design.jpg',
     };
     return (
-      <View style={styles.container}>
-        <FlatList
-          style={styles.container}
-          contentContainerStyle={styles.contentContainer}
-          ListEmptyComponent={EmptyShopList}
-        />
-      </View>
+      <Screen>
+        <View style={styles.container}>
+          <FlatList
+            style={styles.container}
+            contentContainerStyle={[
+              styles.contentContainer,
+              { marginTop: paddingTop },
+            ]}
+            ListEmptyComponent={EmptyShopList}
+          />
+        </View>
+      </Screen>
     );
   }
 }
