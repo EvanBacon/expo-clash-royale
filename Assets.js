@@ -11,6 +11,9 @@ export default {
 		"arrow": {
 			"green.png": require(`./assets/images/arrow/green.png`)
 		},
+		"bubble": {
+			"chatBottom.png": require(`./assets/images/bubble/chatBottom.png`)
+		},
 		"buttons": {
 			"blue.png": require(`./assets/images/buttons/blue.png`),
 			"dark.png": require(`./assets/images/buttons/dark.png`),
@@ -24,14 +27,12 @@ export default {
 			"coin.png": require(`./assets/images/icons/coin.png`),
 			"store.png": require(`./assets/images/icons/store.png`)
 		},
-		"bubble": {
-			"chatBottom.png": require(`./assets/images/bubble/chatBottom.png`)
-		},
-		"textures": {
-			"wood.jpg": require(`./assets/images/textures/wood.jpg`)
-		},
 		"rims": {
 			"light.png": require(`./assets/images/rims/light.png`)
+		},
+		"textures": {
+			"chest.png": require(`./assets/images/textures/chest.png`),
+			"wood.jpg": require(`./assets/images/textures/wood.jpg`)
 		}
 	}
 };

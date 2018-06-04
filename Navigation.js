@@ -66,18 +66,19 @@ const BattleIcon = props => (
 
 const TabNavigation = TabNavigator(
   {
-    Shop: {
-      screen: ShopScreen,
-      navigationOptions: {
-        title: 'Shop',
-        tabBarIcon: ShopIcon,
-      },
-    },
     Battle: {
       screen: BattleScreen,
       navigationOptions: {
         title: 'Battle',
         tabBarIcon: BattleIcon,
+      },
+    },
+
+    Shop: {
+      screen: ShopScreen,
+      navigationOptions: {
+        title: 'Shop',
+        tabBarIcon: ShopIcon,
       },
     },
 

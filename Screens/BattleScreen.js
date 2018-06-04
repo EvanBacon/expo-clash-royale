@@ -15,6 +15,8 @@ import isIphoneX, { paddingTop } from '../utils/isIphoneX';
 import TitleCell from '../components/TitleCell';
 import SillyButton from '../components/SillyButton';
 import ValueIndicator from '../components/ValueIndicator';
+import BounceResizeButton from '../components/BounceResizeButton';
+import CartoonText from '../components/CartoonText';
 
 export default class BattleScreen extends React.Component {
   get topRow() {
@@ -60,21 +62,77 @@ export default class BattleScreen extends React.Component {
 
   get actionButtons() {
     return (
-      <View style={{ height: 72, marginTop: 12, flexDirection: 'row' }}>
-        <SillyButton tintColor="yellow" style={{ marginRight: 12, flex: 1 }} />
-        <SillyButton tintColor="blue" style={{ flex: 1 }} />
+      <View
+        style={{
+          height: 84,
+          marginTop: 12,
+          marginHorizontal: '10%',
+          justifyContent: 'space-between',
+          alignItems: 'stretch',
+          flexDirection: 'row',
+        }}
+      >
+        <BounceResizeButton
+          imageProps={{
+            style: {
+              flex: 1,
+              justifyContent: 'center',
+              alignItems: 'center',
+            },
+            resizeMethod: 'scale',
+            source: Assets.images.buttons['yellow.png'],
+          }}
+          style={{ width: '49%' }}
+        >
+          <CartoonText style={{ fontSize: 18 }}>Battle</CartoonText>
+        </BounceResizeButton>
+        <BounceResizeButton
+          imageProps={{
+            style: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+            resizeMethod: 'scale',
+            source: Assets.images.buttons['blue.png'],
+          }}
+          style={{ width: '49%' }}
+        >
+          <CartoonText style={{ fontSize: 18 }}>2v2</CartoonText>
+        </BounceResizeButton>
       </View>
     );
   }
 
+  getChestSlot = ({ image }) => (
+    <BounceResizeButton
+      imageProps={{
+        style: {
+          flex: 1,
+          opacity: image ? 1 : 0.5,
+          justifyContent: 'center',
+          alignItems: 'center',
+        },
+        resizeMethod: 'scale',
+        source: Assets.images.buttons['yellow.png'],
+      }}
+      style={{ flex: 1 }}
+    >
+      {image && (
+        <Image
+          source={image}
+          style={{ flex: 0.65, aspectRatio: 1, resizeMode: 'contain' }}
+        />
+      )}
+      <CartoonText style={{ fontSize: 12, textAlign: 'center' }}>
+        {image ? 'OPEN' : 'Chest\nSlot'}
+      </CartoonText>
+    </BounceResizeButton>
+  );
   get bottomRow() {
     //Chests
     return (
-      <View style={{ height: 72, marginTop: 12, flexDirection: 'row' }}>
-        <SillyButton tintColor="yellow" style={{ flex: 1 }} />
-        <SillyButton tintColor="blue" style={{ flex: 1 }} />
-        <SillyButton tintColor="blue" style={{ flex: 1 }} />
-        <SillyButton tintColor="blue" style={{ flex: 1 }} />
+      <View style={{ height: 128, marginTop: 12, flexDirection: 'row' }}>
+        {this.getChestSlot({})}
+        {this.getChestSlot({ image: Assets.images.textures['chest.png'] })}
+        {this.getChestSlot({})}
+        {this.getChestSlot({})}
       </View>
     );
   }
