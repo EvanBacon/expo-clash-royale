@@ -5,18 +5,21 @@ import CartoonText from './CartoonText';
 
 class SillyButton extends React.Component {
   render() {
-    const { style, children, tintColor, ...props } = this.props;
+    const { containerStyle, children, tintColor, ...props } = this.props;
     return (
       <TouchableBounce {...props}>
         <View
-          style={{
-            borderRadius: 6,
-            backgroundColor: tintColor,
-            justifyContent: 'center',
-            alignItems: 'center',
-            paddingVertical: 8,
-            paddingHorizontal: 16,
-          }}
+          style={[
+            {
+              borderRadius: 6,
+              backgroundColor: tintColor,
+              justifyContent: 'center',
+              alignItems: 'center',
+              paddingVertical: 8,
+              paddingHorizontal: 16,
+            },
+            containerStyle,
+          ]}
         >
           <CartoonText style={{ color: 'white', textAlign: 'center' }}>
             {children}

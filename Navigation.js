@@ -73,19 +73,19 @@ const TabNavigation = TabNavigator(
         tabBarIcon: ShopIcon,
       },
     },
-    Cards: {
-      screen: CardsScreen,
-      navigationOptions: {
-        title: 'Cards',
-        tabBarIcon: CardsIcon,
-      },
-    },
-
     Battle: {
       screen: BattleScreen,
       navigationOptions: {
         title: 'Battle',
         tabBarIcon: BattleIcon,
+      },
+    },
+
+    Cards: {
+      screen: CardsScreen,
+      navigationOptions: {
+        title: 'Cards',
+        tabBarIcon: CardsIcon,
       },
     },
   },

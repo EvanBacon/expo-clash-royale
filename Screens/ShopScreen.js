@@ -9,6 +9,7 @@ import {
   ImageBackground,
   TouchableOpacity,
   Dimensions,
+  SectionList,
 } from 'react-native';
 import { View } from '../differently-native';
 import { WebBrowser } from 'expo';
@@ -68,7 +69,7 @@ export default class ShopScreen extends React.Component {
     return (
       <Screen>
         <View style={styles.container}>
-          <FlatList
+          <ShopList
             style={styles.container}
             contentContainerStyle={[
               styles.contentContainer,
@@ -78,6 +79,89 @@ export default class ShopScreen extends React.Component {
           />
         </View>
       </Screen>
+    );
+  }
+}
+
+import Shop from '../models/Shop/Shop';
+import TouchableBounce from '../components/TouchableBounce';
+
+const PINK = '#FE0A5B';
+class ShopListItem extends React.PureComponent {
+  render() {
+    const { title, ...props } = this.props;
+    return (
+      <TouchableBounce style={{ height: 96, marginVertical: 8 }}>
+        <DopeButtonImage style={{ width: '100%', flex: 1 }}>
+          <CartoonText>{title}</CartoonText>
+        </DopeButtonImage>
+      </TouchableBounce>
+    );
+  }
+}
+
+class DopeButtonImage extends React.PureComponent {
+  get capInsets() {
+    const inset = 50;
+    return {
+      top: inset,
+      left: inset,
+      bottom: inset,
+      right: inset,
+    };
+  }
+  render() {
+    const { ...props } = this.props;
+    return (
+      <ImageBackground
+        resizeMode="stretch"
+        source={Assets.images.buttons['blue.png']}
+        capInsets={this.capInsets}
+        {...props}
+      />
+    );
+  }
+}
+
+class ShopListSectionHeader extends React.PureComponent {
+  render() {
+    const { title, ...props } = this.props;
+    return (
+      <View
+        style={{
+          borderBottomWidth: 2,
+          borderTopWidth: 2,
+          borderColor: 'rgba(0,0,0,0.35)',
+          width: '100%',
+          paddingVertical: 8,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: PINK,
+        }}
+      >
+        <CartoonText>{title}</CartoonText>
+      </View>
+    );
+  }
+}
+
+class ShopList extends React.Component {
+  renderSectionHeader = ({ section }) => <ShopListSectionHeader {...section} />;
+
+  renderItem = ({ item, index, section }) => (
+    <ShopListItem key={index} {...item} />
+  );
+
+  render() {
+    const { ...props } = this.props;
+    return (
+      <SectionList
+        {...props}
+        renderItem={this.renderItem}
+        renderSectionHeader={this.renderSectionHeader}
+        sections={Shop.shared.isles}
+        keyExtractor={(item, index) => item + index}
+      />
     );
   }
 }

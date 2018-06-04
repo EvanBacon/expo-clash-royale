@@ -11,101 +11,131 @@ import { WebBrowser } from 'expo';
 import { View } from '../differently-native';
 import Assets from '../Assets';
 import Screen from '../components/Screen';
+import isIphoneX, { paddingTop } from '../utils/isIphoneX';
+import TitleCell from '../components/TitleCell';
+import SillyButton from '../components/SillyButton';
+import ValueIndicator from '../components/ValueIndicator';
 
 export default class BattleScreen extends React.Component {
+  get topRow() {
+    //Info
+    return (
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+
+          height: 48,
+        }}
+      >
+        <TitleCell
+          title={'Masterbacon'}
+          subtitle={'No Clan'}
+          subtitleStyle={{ fontSize: 8, color: 'yellow' }}
+          titleStyle={{ fontSize: 10 }}
+          image={{
+            uri:
+              'https://cdn-images-1.medium.com/fit/c/58/58/0*7hpwPqrKW-8i1C3u.jpg',
+          }}
+        >
+          <ValueIndicator
+            value={0}
+            tint={'#E5B964'}
+            image={Assets.images.icons['coin.png']}
+          />
+        </TitleCell>
+
+        <SillyButton
+          tintColor={'#5A60A4'}
+          style={{
+            aspectRatio: 1,
+            width: 64,
+          }}
+        >
+          S
+        </SillyButton>
+      </View>
+    );
+  }
+
+  get actionButtons() {
+    return (
+      <View style={{ height: 72, marginTop: 12, flexDirection: 'row' }}>
+        <SillyButton tintColor="yellow" style={{ marginRight: 12, flex: 1 }} />
+        <SillyButton tintColor="blue" style={{ flex: 1 }} />
+      </View>
+    );
+  }
+
+  get bottomRow() {
+    //Chests
+    return (
+      <View style={{ height: 72, marginTop: 12, flexDirection: 'row' }}>
+        <SillyButton tintColor="yellow" style={{ flex: 1 }} />
+        <SillyButton tintColor="blue" style={{ flex: 1 }} />
+        <SillyButton tintColor="blue" style={{ flex: 1 }} />
+        <SillyButton tintColor="blue" style={{ flex: 1 }} />
+      </View>
+    );
+  }
+
+  get sideMissionRow() {
+    return (
+      <View style={{ height: 72, flexDirection: 'row' }}>
+        <SillyButton tintColor="yellow" style={{ marginRight: 12, flex: 1 }} />
+        <SillyButton tintColor="blue" style={{ flex: 1 }} />
+      </View>
+    );
+  }
+
+  get leftMiddleColumn() {
+    return (
+      <View style={{}}>
+        <SillyButton tintColor="yellow" style={{ flex: 1 }} />
+        <SillyButton tintColor="blue" style={{ flex: 1 }} />
+      </View>
+    );
+  }
+  get rightMiddleColumn() {
+    return (
+      <View style={{}}>
+        <SillyButton tintColor="yellow" style={{ flex: 1 }} />
+        <SillyButton tintColor="blue" style={{ flex: 1 }} />
+      </View>
+    );
+  }
+
+  get middleRow() {
+    return (
+      <View style={{ height: 72, flexDirection: 'row' }}>
+        {this.leftMiddleColumn}
+        <SillyButton tintColor="blue" style={{ flex: 1 }} />
+        {this.rightMiddleColumn}
+      </View>
+    );
+  }
+
   render() {
     return (
       <Screen>
         <View style={styles.container}>
-          <ScrollView
-            style={styles.container}
-            contentContainerStyle={styles.contentContainer}
-          >
-            <View style={styles.welcomeContainer} />
-
-            <View style={styles.getStartedContainer}>
-              {this._maybeRenderDevelopmentModeWarning()}
-
-              <Text style={styles.getStartedText}>Get started by opening</Text>
-
-              <View
-                style={[
-                  styles.codeHighlightContainer,
-                  styles.homeScreenFilename,
-                ]}
-              />
-
-              <Text style={styles.getStartedText}>
-                Change this text and your app will automatically reload.
-              </Text>
-            </View>
-
-            <View style={styles.helpContainer}>
-              <TouchableOpacity
-                onPress={this._handleHelpPress}
-                style={styles.helpLink}
-              >
-                <Text style={styles.helpLinkText}>
-                  Help, it didn’t automatically reload!
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </ScrollView>
-
-          <View style={styles.tabBarInfoContainer}>
-            <Text style={styles.tabBarInfoText}>
-              This is a tab bar. You can edit it in:
-            </Text>
-
-            <View
-              style={[styles.codeHighlightContainer, styles.navigationFilename]}
-            />
-          </View>
+          {this.topRow}
+          {this.sideMissionRow}
+          {this.middleRow}
+          {this.actionButtons}
+          {this.bottomRow}
         </View>
       </Screen>
     );
   }
-
-  _maybeRenderDevelopmentModeWarning() {
-    if (__DEV__) {
-      const learnMoreButton = (
-        <Text onPress={this._handleLearnMorePress} style={styles.helpLinkText}>
-          Learn more
-        </Text>
-      );
-
-      return (
-        <Text style={styles.developmentModeText}>
-          Development mode is enabled, your app will be slower but you can use
-          useful development tools. {learnMoreButton}
-        </Text>
-      );
-    } else {
-      return (
-        <Text style={styles.developmentModeText}>
-          You are not in development mode, your app will run at full speed.
-        </Text>
-      );
-    }
-  }
-
-  _handleLearnMorePress = () => {
-    WebBrowser.openBrowserAsync(
-      'https://docs.expo.io/versions/latest/guides/development-mode',
-    );
-  };
-
-  _handleHelpPress = () => {
-    WebBrowser.openBrowserAsync(
-      'https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes',
-    );
-  };
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop,
     backgroundColor: '#3C4A5C',
+    paddingHorizontal: 24,
   },
   developmentModeText: {
     marginBottom: 20,
