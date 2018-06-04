@@ -5,7 +5,7 @@ import Assets from '../../Assets';
 import Currency from './Currency';
 
 export default class GoldCurrencyShopItem extends CurrencyShopItem {
-  constructor({ productValue, priceValue, props }) {
+  constructor({ productValue, priceValue, ...props }) {
     super({
       name: 'Gold',
       color: 'yellow',

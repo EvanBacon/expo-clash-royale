@@ -1,3 +1,3 @@
-export default {
-  blue: 0x0000ff,
-};
+export default (Colors = {
+  blue: '#0000ff',
+});

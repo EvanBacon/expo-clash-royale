@@ -9,32 +9,32 @@ export default class Shop {
       key: 'GEM',
       data: [
         new GemCurrencyShopItem({
-          name: 'Fistful',
+          denomination: 'Fistful',
           priceValue: 1.0,
           productValue: 80,
         }),
         new GemCurrencyShopItem({
-          name: 'Pouch',
+          denomination: 'Pouch',
           priceValue: 5.0,
           productValue: 500,
         }),
         new GemCurrencyShopItem({
-          name: 'Bucket',
+          denomination: 'Bucket',
           priceValue: 10.0,
           productValue: 1200,
         }),
         new GemCurrencyShopItem({
-          name: 'Barrel',
+          denomination: 'Barrel',
           priceValue: 20.0,
           productValue: 2500,
         }),
         new GemCurrencyShopItem({
-          name: 'Wagon',
+          denomination: 'Wagon',
           priceValue: 50.0,
           productValue: 6500,
         }),
         new GemCurrencyShopItem({
-          name: 'Mountain',
+          denomination: 'Mountain',
           priceValue: 100.0,
           productValue: 14000,
         }),
@@ -45,17 +45,17 @@ export default class Shop {
       key: 'GLD',
       data: [
         new GoldCurrencyShopItem({
-          name: 'Pouch',
+          denomination: 'Pouch',
           priceValue: 60.0,
           productValue: 1000,
         }),
         new GoldCurrencyShopItem({
-          name: 'Bucket',
+          denomination: 'Bucket',
           priceValue: 500.0,
           productValue: 10000,
         }),
         new GoldCurrencyShopItem({
-          name: 'Wagon',
+          denomination: 'Wagon',
           priceValue: 4500.0,
           productValue: 100000,
         }),

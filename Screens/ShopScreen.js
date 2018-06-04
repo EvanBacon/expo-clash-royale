@@ -73,7 +73,7 @@ export default class ShopScreen extends React.Component {
             style={styles.container}
             contentContainerStyle={[
               styles.contentContainer,
-              { marginTop: paddingTop },
+              { paddingTop: paddingTop, paddingBottom: 24 },
             ]}
             ListEmptyComponent={EmptyShopList}
           />
@@ -85,15 +85,36 @@ export default class ShopScreen extends React.Component {
 
 import Shop from '../models/Shop/Shop';
 import TouchableBounce from '../components/TouchableBounce';
+import Currency from '../models/Shop/Currency';
 
 const PINK = '#FE0A5B';
 class ShopListItem extends React.PureComponent {
   render() {
-    const { title, ...props } = this.props;
+    const { title, price, product, color, ...props } = this.props;
     return (
-      <TouchableBounce style={{ height: 96, marginVertical: 8 }}>
-        <DopeButtonImage style={{ width: '100%', flex: 1 }}>
-          <CartoonText>{title}</CartoonText>
+      <TouchableBounce
+        style={{ height: 96, marginVertical: 3, marginHorizontal: 6 }}
+      >
+        <DopeButtonImage
+          style={{
+            width: '100%',
+            flex: 1,
+          }}
+          color={color}
+        >
+          <View
+            style={{
+              flex: 1,
+              paddingHorizontal: 12,
+              paddingVertical: 8,
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              flexDirection: 'row',
+            }}
+          >
+            <ProductView name={this.props.formatName} {...product} />
+            <PriceView {...price} />
+          </View>
         </DopeButtonImage>
       </TouchableBounce>
     );
@@ -122,6 +143,36 @@ class DopeButtonImage extends React.PureComponent {
     );
   }
 }
+
+const ProductView = ({ image, name, value, ...props }) => (
+  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+    <Image
+      source={image}
+      style={{
+        maxWidth: 64,
+        resizeMode: 'contain',
+        aspectRatio: 1,
+        marginRight: 8,
+      }}
+    />
+    <View>
+      <CartoonText style={{ fontSize: 12 }}>{name}</CartoonText>
+      <CartoonText style={{ fontSize: 10 }}>{value.value}</CartoonText>
+    </View>
+  </View>
+);
+
+function formatPriceValue({ value, currency: { id } }) {
+  switch (id) {
+    case Currency.physical.id:
+      return `$${value - 0.01}`;
+    default:
+      return value;
+  }
+}
+const PriceView = ({ value, currency, ...props }) => {
+  return <CartoonText>{formatPriceValue({ value, currency })}</CartoonText>;
+};
 
 class ShopListSectionHeader extends React.PureComponent {
   render() {
@@ -157,6 +208,7 @@ class ShopList extends React.Component {
     return (
       <SectionList
         {...props}
+        stickySectionHeadersEnabled={false}
         renderItem={this.renderItem}
         renderSectionHeader={this.renderSectionHeader}
         sections={Shop.shared.isles}

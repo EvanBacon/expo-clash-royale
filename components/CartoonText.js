@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text } from 'react-native';
-export default ({ style, ...props }) => (
+export default (CartoonText = ({ style, ...props }) => (
   <Text
     style={[
       {
@@ -15,4 +15,4 @@ export default ({ style, ...props }) => (
     ]}
     {...props}
   />
-);
+));
