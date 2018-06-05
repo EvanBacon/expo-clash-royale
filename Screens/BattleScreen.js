@@ -47,15 +47,30 @@ export default class BattleScreen extends React.Component {
           />
         </TitleCell>
 
-        <SillyButton
-          tintColor={'#5A60A4'}
+        <BounceResizeButton
+          imageProps={{
+            style: {
+              flex: 1,
+              alignItems: 'center',
+              flexDirection: 'row',
+            },
+            resizeMethod: 'scale',
+            source: Assets.images.buttons['gray.png'],
+          }}
           style={{
             aspectRatio: 1,
-            width: 64,
+            width: 48,
           }}
         >
-          S
-        </SillyButton>
+          <Image
+            source={Assets.images.textures['chest.png']}
+            style={{
+              width: 24,
+              aspectRatio: 1,
+              resizeMode: 'contain',
+            }}
+          />
+        </BounceResizeButton>
       </View>
     );
   }
@@ -270,7 +285,7 @@ export default class BattleScreen extends React.Component {
             aspectRatio: 1,
             flex: 1,
             resizeMode: 'contain',
-            maxWidth: '50%',
+            maxWidth: '45%',
           }}
         />
         {this.rightMiddleColumn}
@@ -290,7 +305,7 @@ export default class BattleScreen extends React.Component {
             {this.middleRow}
             {this.actionButtons}
           </View>
-          <View style={{ flex: 0.25 }}>{this.bottomRow}</View>
+          <View style={{ flex: 0.3 }}>{this.bottomRow}</View>
         </View>
       </Screen>
     );
@@ -302,7 +317,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop,
     backgroundColor: '#3C4A5C',
-    paddingHorizontal: 24,
+    paddingHorizontal: 8,
   },
   developmentModeText: {
     marginBottom: 20,

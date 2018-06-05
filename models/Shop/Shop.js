@@ -1,6 +1,6 @@
 import ShopIsle from './ShopIsle';
-import GemCurrencyShopItem from './GemCurrencyShopItem';
-import GoldCurrencyShopItem from './GoldCurrencyShopItem';
+import GuapCurrencyShopItem from './GuapCurrencyShopItem';
+import IceCurrencyShopItem from './IceCurrencyShopItem';
 
 export default class Shop {
   isles = [
@@ -8,54 +8,54 @@ export default class Shop {
       title: 'Gems',
       key: 'GEM',
       data: [
-        new GemCurrencyShopItem({
-          denomination: 'Fistful',
+        new GuapCurrencyShopItem({
+          denomination: 'Clips',
           priceValue: 1.0,
           productValue: 80,
         }),
-        new GemCurrencyShopItem({
-          denomination: 'Pouch',
+        new GuapCurrencyShopItem({
+          denomination: 'Wads',
           priceValue: 5.0,
           productValue: 500,
         }),
-        new GemCurrencyShopItem({
-          denomination: 'Bucket',
+        new GuapCurrencyShopItem({
+          denomination: 'Stacks',
           priceValue: 10.0,
           productValue: 1200,
         }),
-        new GemCurrencyShopItem({
-          denomination: 'Barrel',
+        new GuapCurrencyShopItem({
+          denomination: 'Cases',
           priceValue: 20.0,
           productValue: 2500,
         }),
-        new GemCurrencyShopItem({
-          denomination: 'Wagon',
+        new GuapCurrencyShopItem({
+          denomination: 'Maybach',
           priceValue: 50.0,
           productValue: 6500,
         }),
-        new GemCurrencyShopItem({
-          denomination: 'Mountain',
+        new GuapCurrencyShopItem({
+          denomination: 'Maybach',
           priceValue: 100.0,
           productValue: 14000,
         }),
       ],
     }),
     new ShopIsle({
-      title: 'Gold',
-      key: 'GLD',
+      title: 'Ice',
+      key: 'ICE',
       data: [
-        new GoldCurrencyShopItem({
-          denomination: 'Pouch',
+        new IceCurrencyShopItem({
+          denomination: 'Chains',
           priceValue: 60.0,
           productValue: 1000,
         }),
-        new GoldCurrencyShopItem({
-          denomination: 'Bucket',
+        new IceCurrencyShopItem({
+          denomination: 'Freezers',
           priceValue: 500.0,
           productValue: 10000,
         }),
-        new GoldCurrencyShopItem({
-          denomination: 'Wagon',
+        new IceCurrencyShopItem({
+          denomination: 'Glaciers',
           priceValue: 4500.0,
           productValue: 100000,
         }),
