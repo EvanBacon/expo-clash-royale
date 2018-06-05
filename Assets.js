@@ -15,8 +15,9 @@ export default {
 			"chatBottom.png": require(`./assets/images/bubble/chatBottom.png`)
 		},
 		"buttons": {
-			"blue.png": require(`./assets/images/buttons/blue.png`),
 			"dark.png": require(`./assets/images/buttons/dark.png`),
+			"blue.png": require(`./assets/images/buttons/blue.png`),
+			"gray.png": require(`./assets/images/buttons/gray.png`),
 			"green.png": require(`./assets/images/buttons/green.png`),
 			"simpleBlue.png": require(`./assets/images/buttons/simpleBlue.png`),
 			"yellow.png": require(`./assets/images/buttons/yellow.png`)
@@ -32,6 +33,7 @@ export default {
 		},
 		"textures": {
 			"chest.png": require(`./assets/images/textures/chest.png`),
+			"level1.png": require(`./assets/images/textures/level1.png`),
 			"wood.jpg": require(`./assets/images/textures/wood.jpg`)
 		}
 	}

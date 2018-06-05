@@ -100,7 +100,7 @@ export default class BattleScreen extends React.Component {
     );
   }
 
-  getChestSlot = ({ image }) => (
+  getChestSlot = ({ image, color }) => (
     <BounceResizeButton
       imageProps={{
         style: {
@@ -110,7 +110,7 @@ export default class BattleScreen extends React.Component {
           alignItems: 'center',
         },
         resizeMethod: 'scale',
-        source: Assets.images.buttons['yellow.png'],
+        source: Assets.images.buttons[color + '.png'],
       }}
       style={{ flex: 1 }}
     >
@@ -129,45 +129,150 @@ export default class BattleScreen extends React.Component {
     //Chests
     return (
       <View style={{ height: 128, marginTop: 12, flexDirection: 'row' }}>
-        {this.getChestSlot({})}
-        {this.getChestSlot({ image: Assets.images.textures['chest.png'] })}
-        {this.getChestSlot({})}
-        {this.getChestSlot({})}
+        {this.getChestSlot({ color: 'gray' })}
+        {this.getChestSlot({
+          color: 'yellow',
+          image: Assets.images.textures['chest.png'],
+        })}
+        {this.getChestSlot({ color: 'gray' })}
+        {this.getChestSlot({ color: 'gray' })}
       </View>
     );
   }
 
   get sideMissionRow() {
     return (
-      <View style={{ height: 72, flexDirection: 'row' }}>
-        <SillyButton tintColor="yellow" style={{ marginRight: 12, flex: 1 }} />
-        <SillyButton tintColor="blue" style={{ flex: 1 }} />
+      <View style={{ height: 72, marginTop: 8, flexDirection: 'row' }}>
+        <BounceResizeButton
+          imageProps={{
+            style: {
+              flex: 1,
+              alignItems: 'center',
+              flexDirection: 'row',
+            },
+            resizeMethod: 'scale',
+            source: Assets.images.buttons['yellow.png'],
+          }}
+          style={{ flex: 1 }}
+        >
+          <Image
+            source={Assets.images.textures['chest.png']}
+            style={{
+              width: 56,
+              marginLeft: 12,
+              aspectRatio: 1,
+              resizeMode: 'contain',
+            }}
+          />
+          <CartoonText style={{ flex: 1, fontSize: 12, textAlign: 'center' }}>
+            Quests
+          </CartoonText>
+        </BounceResizeButton>
+
+        <BounceResizeButton
+          imageProps={{
+            style: {
+              flex: 1,
+              alignItems: 'center',
+              flexDirection: 'row',
+            },
+            resizeMethod: 'scale',
+            source: Assets.images.buttons['blue.png'],
+          }}
+          style={{ flex: 1 }}
+        >
+          <CartoonText
+            style={{
+              flex: 1,
+              fontSize: 10,
+              color: 'cyan',
+              textAlign: 'center',
+            }}
+          >
+            Crown Chest
+          </CartoonText>
+
+          <Image
+            source={Assets.images.textures['chest.png']}
+            style={{
+              width: 56,
+              marginRight: 12,
+              aspectRatio: 1,
+              resizeMode: 'contain',
+            }}
+          />
+        </BounceResizeButton>
       </View>
     );
   }
 
+  getSquareButton = ({ image, color, notifications }) => (
+    <BounceResizeButton
+      imageProps={{
+        style: {
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          aspectRatio: 1,
+          padding: 8,
+        },
+        resizeMethod: 'scale',
+        source: Assets.images.buttons[color + '.png'],
+      }}
+      style={{ maxWidth: 56, aspectRatio: 1 }}
+    >
+      <Image source={image} style={{ flex: 1, resizeMode: 'contain' }} />
+    </BounceResizeButton>
+  );
+
   get leftMiddleColumn() {
     return (
-      <View style={{}}>
-        <SillyButton tintColor="yellow" style={{ flex: 1 }} />
-        <SillyButton tintColor="blue" style={{ flex: 1 }} />
+      <View style={{ justifyContent: 'space-between' }}>
+        {this.getSquareButton({
+          image: Assets.images.textures['chest.png'],
+          color: 'gray',
+        })}
+        {this.getSquareButton({
+          image: Assets.images.textures['chest.png'],
+          color: 'gray',
+        })}
       </View>
     );
   }
   get rightMiddleColumn() {
     return (
-      <View style={{}}>
-        <SillyButton tintColor="yellow" style={{ flex: 1 }} />
-        <SillyButton tintColor="blue" style={{ flex: 1 }} />
+      <View style={{ justifyContent: 'space-between' }}>
+        {this.getSquareButton({
+          image: Assets.images.textures['chest.png'],
+          color: 'gray',
+        })}
+        {this.getSquareButton({
+          image: Assets.images.textures['chest.png'],
+          color: 'yellow',
+        })}
       </View>
     );
   }
 
   get middleRow() {
     return (
-      <View style={{ height: 72, flexDirection: 'row' }}>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'space-between',
+          flexDirection: 'row',
+        }}
+      >
         {this.leftMiddleColumn}
-        <SillyButton tintColor="blue" style={{ flex: 1 }} />
+        <Image
+          source={Assets.images.textures['level1.png']}
+          style={{
+            aspectRatio: 1,
+            flex: 1,
+            resizeMode: 'contain',
+            maxWidth: '50%',
+          }}
+        />
         {this.rightMiddleColumn}
       </View>
     );
@@ -177,11 +282,15 @@ export default class BattleScreen extends React.Component {
     return (
       <Screen>
         <View style={styles.container}>
-          {this.topRow}
-          {this.sideMissionRow}
-          {this.middleRow}
-          {this.actionButtons}
-          {this.bottomRow}
+          <View style={{ flex: 0.3 }}>
+            {this.topRow}
+            {this.sideMissionRow}
+          </View>
+          <View style={{ flex: 0.4 }}>
+            {this.middleRow}
+            {this.actionButtons}
+          </View>
+          <View style={{ flex: 0.25 }}>{this.bottomRow}</View>
         </View>
       </Screen>
     );
