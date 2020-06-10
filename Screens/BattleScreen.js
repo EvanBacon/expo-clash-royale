@@ -17,6 +17,7 @@ import SillyButton from '../components/SillyButton';
 import ValueIndicator from '../components/ValueIndicator';
 import BounceResizeButton from '../components/BounceResizeButton';
 import CartoonText from '../components/CartoonText';
+import GucciBackdrop from '../components/GucciBackdrop';
 
 export default class BattleScreen extends React.Component {
   get topRow() {
@@ -146,7 +147,7 @@ export default class BattleScreen extends React.Component {
       <View style={{ height: 128, marginTop: 12, flexDirection: 'row' }}>
         {this.getChestSlot({ color: 'gray' })}
         {this.getChestSlot({
-          color: 'yellow',
+          color: 'yellowC',
           image: Assets.images.textures['chest.png'],
         })}
         {this.getChestSlot({ color: 'gray' })}
@@ -166,9 +167,12 @@ export default class BattleScreen extends React.Component {
               flexDirection: 'row',
             },
             resizeMethod: 'scale',
-            source: Assets.images.buttons['yellow.png'],
+            source: Assets.images.buttons['yellowB.png'],
           }}
           style={{ flex: 1 }}
+          onPress={() => {
+            this.props.navigation.navigate('Settings', {});
+          }}
         >
           <Image
             source={Assets.images.textures['chest.png']}
@@ -192,7 +196,7 @@ export default class BattleScreen extends React.Component {
               flexDirection: 'row',
             },
             resizeMethod: 'scale',
-            source: Assets.images.buttons['blue.png'],
+            source: Assets.images.buttons['blueB.png'],
           }}
           style={{ flex: 1 }}
         >
@@ -245,11 +249,11 @@ export default class BattleScreen extends React.Component {
       <View style={{ justifyContent: 'space-between' }}>
         {this.getSquareButton({
           image: Assets.images.textures['chest.png'],
-          color: 'gray',
+          color: 'navy',
         })}
         {this.getSquareButton({
           image: Assets.images.textures['chest.png'],
-          color: 'gray',
+          color: 'navy',
         })}
       </View>
     );
@@ -259,11 +263,11 @@ export default class BattleScreen extends React.Component {
       <View style={{ justifyContent: 'space-between' }}>
         {this.getSquareButton({
           image: Assets.images.textures['chest.png'],
-          color: 'gray',
+          color: 'navy',
         })}
         {this.getSquareButton({
           image: Assets.images.textures['chest.png'],
-          color: 'yellow',
+          color: 'navy',
         })}
       </View>
     );
@@ -294,6 +298,8 @@ export default class BattleScreen extends React.Component {
   }
 
   render() {
+    // <GucciBackdrop />
+
     return (
       <Screen>
         <View style={styles.container}>
@@ -316,7 +322,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop,
-    backgroundColor: '#3C4A5C',
+    // backgroundColor: '#3C4A5C',
     paddingHorizontal: 8,
   },
   developmentModeText: {

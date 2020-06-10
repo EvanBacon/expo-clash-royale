@@ -11,7 +11,25 @@ import WoodTexture from '../components/WoodTexture';
 import { View } from '../differently-native';
 import Screen from '../components/Screen';
 import isIphoneX, { paddingTop } from '../utils/isIphoneX';
+import BounceResizeButton from '../components/BounceResizeButton';
+import TitleCell from '../components/TitleCell';
+import GucciBackdrop from '../components/GucciBackdrop';
 
+const UndiscoveredCardListHeader = () => (
+  <View style={{ width: '100%', borderTopWidth: 1, borderTopColor: '#977EC7' }}>
+    <CartoonText
+      style={{
+        fontSize: 10,
+        textAlign: 'center',
+        paddingBottom: 10,
+        marginTop: 8,
+        color: '#977EC7',
+      }}
+    >
+      Battle Deck
+    </CartoonText>
+  </View>
+);
 const CardListHeader = () => (
   <CartoonText
     style={{
@@ -80,28 +98,45 @@ class CardList extends React.Component {
   }
 }
 
+class UndiscoveredCardList extends React.Component {
+  renderItem = ({ item }) => {
+    return <Card {...item} />;
+  };
+  render() {
+    const { props } = this;
+
+    return (
+      <FlatList
+        keyExtractor={(item, index) => index}
+        columnWrapperStyle={{
+          flex: 1,
+          padding: 4,
+          justifyContent: 'space-between',
+          paddingBottom: 48,
+        }}
+        numColumns={4}
+        contentContainerStyle={styles.contentContainer}
+        renderItem={this.renderItem}
+        ListHeaderComponent={UndiscoveredCardListHeader}
+        {...props}
+      />
+    );
+  }
+}
+
 const TipThing = () => (
-  <View
+  <TitleCell
+    title={'Card Collection'}
+    subtitle={'Found: 6/84'}
+    subtitleStyle={{ fontSize: 10, color: '#FF9BFF' }}
+    titleStyle={{ fontSize: 14 }}
     style={{
-      backgroundColor: 'rgba(0,0,0,0.5)',
-      paddingHorizontal: 10,
-      paddingVertical: 6,
-      borderRadius: 8,
       marginHorizontal: 12,
       marginVertical: 24,
-
-      flexDirection: 'row',
-      justifyContent: 'space-between',
     }}
   >
-    <View style={{ justifyContent: 'space-between' }}>
-      <CartoonText style={{ fontSize: 14 }}>Card Collection</CartoonText>
-      <CartoonText style={{ color: '#FF9BFF', fontSize: 10 }}>
-        Found: 6/84
-      </CartoonText>
-    </View>
     <SillyButton tintColor={'#5A60A4'}>By Arena</SillyButton>
-  </View>
+  </TitleCell>
 );
 
 class CardsScreen extends React.Component {
@@ -159,9 +194,10 @@ class CardsScreen extends React.Component {
         tint: '#70C65F',
         level: 3,
       },
-      {},
-      {},
+      // {},
+      // {},
     ];
+    // <GucciBackdrop light />
 
     return (
       <Screen>
@@ -172,6 +208,7 @@ class CardsScreen extends React.Component {
           >
             <CardList data={cards} />
             <TipThing />
+            <UndiscoveredCardList data={cards} />
           </ScrollView>
         </View>
       </Screen>
@@ -183,7 +220,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     // paddingTop: 30,
-    backgroundColor: '#3C4A5C',
+    // backgroundColor: '#3C4A5C',
   },
 
   contentContainer: {

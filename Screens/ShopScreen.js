@@ -66,6 +66,8 @@ export default class ShopScreen extends React.Component {
       uri:
         'https://upload.wikimedia.org/wikipedia/commons/7/75/Evan_Bacon%2C_Design_Technologist_II_at_Frog_Design.jpg',
     };
+    // <GucciBackdrop light />
+
     return (
       <Screen>
         <View style={styles.container}>
@@ -86,6 +88,7 @@ export default class ShopScreen extends React.Component {
 import Shop from '../models/Shop/Shop';
 import TouchableBounce from '../components/TouchableBounce';
 import Currency from '../models/Shop/Currency';
+import GucciBackdrop from '../components/GucciBackdrop';
 
 const PINK = '#FE0A5B';
 class ShopListItem extends React.PureComponent {
@@ -221,7 +224,7 @@ class ShopList extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#3C4A5C',
+    // backgroundColor: '#3C4A5C',
   },
   developmentModeText: {
     marginBottom: 20,

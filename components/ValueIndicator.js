@@ -11,13 +11,16 @@ class ValueIndicator extends React.PureComponent {
     onPress && onPress();
   };
   render() {
-    const { value, tint, image } = this.props;
+    const { value, tint, image, imageTint } = this.props;
     return (
       <TouchableBounce onPress={this.onPress} style={styles.container}>
         <View style={styles.bar} />
         <CartoonText style={{ color: tint }}>{value}</CartoonText>
-        <View style={[styles.imageContainer, { backgroundColor: tint }]}>
-          <Image source={image} style={styles.image} />
+        <View style={[styles.imageContainer]}>
+          <Image
+            source={image}
+            style={[styles.image, { tintColor: imageTint }]}
+          />
         </View>
       </TouchableBounce>
     );
@@ -51,15 +54,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   imageContainer: {
-    padding: 4,
-    justifyContent: 'center',
+    // padding: 4,
+    justifyContent: 'flex-start',
     alignItems: 'center',
-    borderRadius: 20,
-    maxWidth: 35,
+    maxWidth: 45,
     aspectRatio: 1,
-    backgroundColor: 'white',
-    borderWidth: 2,
-    borderColor: 'black',
+    backgroundColor: 'transparent',
+    // borderWidth: 2,
+    // borderColor: 'black',
   },
 });
 

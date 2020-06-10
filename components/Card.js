@@ -4,6 +4,9 @@ import { View } from '../differently-native';
 import UpgradeLoader from './UpgradeLoader';
 import CartoonText from './CartoonText';
 import TouchableBounce from './TouchableBounce';
+import BounceResizeButton from './BounceResizeButton';
+import Assets from '../Assets';
+import DopeButtonImage from './DopeButtonImage';
 
 export default class Card extends React.Component {
   renderEmpty = () => (
@@ -23,11 +26,15 @@ export default class Card extends React.Component {
       nextLevel: { max, value },
     } = this.props;
     return (
-      <TouchableBounce onPress={onPress}>
+      <TouchableBounce>
         <View style={styles.container}>
           <View style={styles.imageContainer}>
             <Image source={image} style={styles.image} />
             <Text style={styles.level}>Level {level}</Text>
+            <DopeButtonImage
+              style={StyleSheet.absoluteFill}
+              source={Assets.images.rims['light.png']}
+            />
           </View>
 
           <UpgradeLoader
@@ -54,18 +61,18 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    overflow: 'hidden',
+    height: 128,
+    aspectRatio: 3 / 4,
+    backgroundColor: 'rgba(0,0,0,0.7)',
   },
   container: {
     borderRadius: 6,
     borderTopLeftRadius: 12,
     borderTopRightRadius: 12,
-    padding: 5,
     backgroundColor: 'rgba(0,0,0,0.7)',
   },
   imageContainer: {
-    borderRadius: 8,
-    borderWidth: 5,
-    borderColor: 'rgba(255,255,255,0.4)',
     overflow: 'hidden',
     height: 128,
     aspectRatio: 3 / 4,
@@ -73,10 +80,12 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     resizeMode: 'cover',
+    borderRadius: 12,
+    margin: 6,
   },
   level: {
     position: 'absolute',
-    bottom: 0,
+    bottom: 10,
     left: 0,
     right: 0,
     color: '#A4CBFB',

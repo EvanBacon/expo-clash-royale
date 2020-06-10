@@ -29,12 +29,12 @@ export default class Shop {
           productValue: 2500,
         }),
         new GuapCurrencyShopItem({
-          denomination: 'Maybach',
+          denomination: 'Maybachs',
           priceValue: 50.0,
           productValue: 6500,
         }),
         new GuapCurrencyShopItem({
-          denomination: 'Maybach',
+          denomination: 'Compounds',
           priceValue: 100.0,
           productValue: 14000,
         }),

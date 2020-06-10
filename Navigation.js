@@ -3,10 +3,12 @@ import { TabNavigator, StackNavigator } from 'react-navigation'; // Version can 
 import BattleScreen from './Screens/BattleScreen';
 import ShopScreen from './Screens/ShopScreen';
 import CardsScreen from './Screens/CardsScreen';
+import SettingsScreen from './Screens/SettingsScreen';
+
 import { Image, Text, StyleSheet, View } from 'react-native';
 import Assets from './Assets';
 import ValueIndicatorBar from './components/ValueIndicatorBar';
-
+import CustomTabBar from './components/CustomTabBar';
 const CustomHeader = ({ title, subtitle }) => (
   <View style={{}}>
     <Text style={{}}>{title}</Text>
@@ -73,6 +75,13 @@ const TabNavigation = TabNavigator(
         tabBarIcon: BattleIcon,
       },
     },
+    Cards: {
+      screen: CardsScreen,
+      navigationOptions: {
+        title: 'Cards',
+        tabBarIcon: CardsIcon,
+      },
+    },
 
     Shop: {
       screen: ShopScreen,
@@ -81,16 +90,9 @@ const TabNavigation = TabNavigator(
         tabBarIcon: ShopIcon,
       },
     },
-
-    Cards: {
-      screen: CardsScreen,
-      navigationOptions: {
-        title: 'Cards',
-        tabBarIcon: CardsIcon,
-      },
-    },
   },
   {
+    // tabBarComponent: CustomTabBar,
     swipeEnabled: true,
     tabBarPosition: 'bottom',
     animationEnabled: true,
@@ -132,19 +134,22 @@ const TabNavigation = TabNavigator(
 TabNavigation.navigationOptions = ({ title, subtitle }) => {
   const items = [
     {
-      image: Assets.images.icons['store.png'],
-      tint: 'yellow',
+      image: Assets.images.icons['mixtapes.png'],
+      tint: 'silver',
       value: 123,
+      imageTint: undefined,
     },
     {
-      image: Assets.images.icons['cards.png'],
-      tint: 'green',
-      value: 123,
+      image: Assets.images.icons['cubes.png'],
+      tint: 'cyan',
+      value: 67,
+      imageTint: undefined,
     },
     {
-      image: Assets.images.icons['battle.png'],
+      image: Assets.images.icons['cloutLevelColor.png'],
       tint: 'orange',
-      value: 123,
+      value: 3,
+      imageTint: undefined,
     },
   ];
 
@@ -166,6 +171,7 @@ TabNavigation.navigationOptions = ({ title, subtitle }) => {
 const Navigation = StackNavigator(
   {
     Main: { screen: TabNavigation },
+    Settings: { screen: SettingsScreen },
   },
   {},
 );

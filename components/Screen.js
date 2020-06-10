@@ -6,7 +6,9 @@ import isIphoneX, { paddingTop } from '../utils/isIphoneX';
 class Screen extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1, paddingTop: 0 }}>{this.props.children}</View>
+      <View style={{ flex: 1, backgroundColor: 'navy', paddingTop: 0 }}>
+        {this.props.children}
+      </View>
     );
   }
 }
